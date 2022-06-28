@@ -6,9 +6,9 @@ const createAuthor = async function (req, res) {
     let author = req.body;
     let authorCreated = await AuthorModel.create(author);
 
-    res.status(201).send({ data: authorCreated });
+    res.status(201).send({ status:true,data: authorCreated });
   } catch (err) {
-    res.status(500).send({ msg: err.message });
+    res.status(500).send({status:false, msg: err.message });
   }
 };
 
@@ -52,7 +52,7 @@ const login = async function (req, res) {
       "Project-1 Blog-Site"
     );
     res.setHeader("x-api-key", token);
-    res.status(201).send({ status: true, data: token });
+    res.status(201).send({ status: true, data: {token:token} });
   } catch (error) {
     res.status(500).send({ status: false, msg: error.message });
   }
